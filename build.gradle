@@ -27,5 +27,7 @@ dependencies {
 	compileOnly('org.projectlombok:lombok')
         compile('org.springframework.boot:spring-boot-starter-web')
         compile('org.springframework.boot:spring-boot-starter-websocket')
+		compile('io.projectreactor:reactor-net')
+	    compile group: 'io.netty', name: 'netty-all', version: '4.1.23.Final'
         testCompile('org.springframework.boot:spring-boot-starter-test')
 }

@@ -26,8 +26,8 @@ public class GreetingController {
 
     Map<String,String> users = new HashMap<>();
 
-    @MessageMapping("/prequalStarted")
-    @SendToUser("/queue/prequalComplete")
+    @MessageMapping("/asyncStarted")
+    @SendToUser("/queue/asyncComplete")
     public String greeting(String message, Message messageObject) throws Exception {
 
         double random = Math.random();
@@ -46,7 +46,7 @@ public class GreetingController {
 
     private void async(Message messageObject, Double taskId){
         try {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -57,7 +57,7 @@ public class GreetingController {
         headerAccessor.setSessionId(user);
         headerAccessor.setLeaveMutable(true);
 
-        template.convertAndSendToUser(user,"/queue/prequalComplete", taskId+":complete", headerAccessor.getMessageHeaders());
+        template.convertAndSendToUser(user,"/queue/asyncComplete", taskId+":complete", headerAccessor.getMessageHeaders());
 
     }
 
